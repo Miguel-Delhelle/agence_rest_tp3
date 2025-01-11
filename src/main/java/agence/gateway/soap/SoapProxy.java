@@ -1,12 +1,8 @@
-package agence.gateway.soap.proxy;
+package agence.gateway.soap;
 
 import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.ArrayList;
-
-import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
+import java.net.URI;
+import java.net.URISyntaxException;
 
 import agence.gateway.soap.jaxws.HotelService;
 import agence.gateway.soap.jaxws.IHotelService;
@@ -14,17 +10,30 @@ import agence.gateway.soap.jaxws.IHotelService;
 
 
 
-public class ProxySoap {
+public class SoapProxy {
+	
+	private URI url;
+	IHotelService hotelProxy;
+	
+	public SoapProxy(String uriInit) throws URISyntaxException, MalformedURLException {
+		URI uri = new URI(uriInit); // On initialise toujours avec cette ip le premier proxy
+		this.url = uri;
+		HotelService serviceTmp = new HotelService(uri.toURL());
+		IHotelService proxy = serviceTmp.getHotelPort();
+		this.hotelProxy = proxy;
 		
-	/*public ProxySoap() {
-		try {
-			initListProxy();
-		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	} */
+	}
 
+	public URI getUrl() {
+		return url;
+	}
+
+	public IHotelService getHotelProxy() {
+		return hotelProxy;
+	}
+
+
+	 
 
 	/*public void initListProxy() throws MalformedURLException {
 		URL url = new URL("http://localhost:8888/hotel"); // On initialise toujours avec cette ip le premier proxy
