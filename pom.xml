@@ -76,7 +76,7 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
-			<!-- <plugin>
+			<!--<plugin>
             <groupId>org.apache.cxf</groupId>
             <artifactId>cxf-codegen-plugin</artifactId>
             <version>4.0.3</version>
@@ -90,7 +90,7 @@
                         	<wsdl>http://localhost:8888/hotel?wsdl</wsdl>
                         	<extraargs>
                             	<extraarg>-p</extraarg>
-                            	<extraarg>agence.gateway.soap.apacheimport</extraarg>
+                            	<extraarg>agence.soap.apacheimport</extraarg>
                         </extraargs>
                     </wsdlOption>
                     </wsdlOptions>

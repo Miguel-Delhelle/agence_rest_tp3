@@ -4,26 +4,33 @@ import java.util.List;
 
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 import agence.rest.models.AdresseModel;
 import agence.rest.models.ChambreModel;
 import agence.rest.models.HotelModel;
 import agence.rest.request.ReservationRequest;
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Transient;
 
-@Configuration
-@Component
-public class RestProxy implements IProxy {
+@Entity
+@DiscriminatorValue("Rest")
+public class RestProxy extends AProxy {
 
-	private final RestTemplate restTemplate;
-	private final String url;
+	
+	@Transient
+	private RestTemplate restTemplate;
+	private String url;
 	
 	
+	
+	public RestProxy() {
+		super();
+	}
+
 	public RestProxy(String url) {
 		
 		RestTemplate restTemplate = new RestTemplate();
@@ -52,10 +59,10 @@ public class RestProxy implements IProxy {
 	}
 
 	@Override
-	public ResponseEntity<String> setReservation(ReservationRequest requete) {
+	public String setReservation(ReservationRequest requete) {
 		// TODO Auto-generated method stub
 		
-		return this.restTemplate.postForEntity(this.url+"/reservation", requete, String.class);
+		return this.restTemplate.postForObject(this.url+"/reservation", requete, String.class);
 	}
 
 	@Override
@@ -68,6 +75,12 @@ public class RestProxy implements IProxy {
 	public AdresseModel adresseHotel() {
 		// TODO Auto-generated method stub
 		return this.restTemplate.getForObject(this.url+"/adress", AdresseModel.class);
+	}
+
+	@Override
+	public List listeTypeChambre() {
+		// TODO Auto-generated method stub
+        return this.restTemplate.exchange(url+"/chambre/type", HttpMethod.GET, null, new ParameterizedTypeReference<List<Enum>>() {}).getBody();
 	}
 	
 }

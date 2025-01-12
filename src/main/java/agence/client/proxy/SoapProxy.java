@@ -3,25 +3,41 @@ package agence.client.proxy;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.cxf.jaxws.JaxWsProxyFactoryBean;
-import org.springframework.context.annotation.Bean;
-import org.springframework.stereotype.Component;
 
 import agence.rest.models.AdresseModel;
 import agence.rest.models.ChambreModel;
 import agence.rest.models.HotelModel;
+import agence.rest.request.ReservationRequest;
+import agence.soap.apacheimport.Chambre;
+import agence.soap.apacheimport.ChambreNonDisponibleException_Exception;
 import agence.soap.apacheimport.IHotelService;
+import agence.soap.apacheimport.ReservationFailedException_Exception;
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Transient;
 
 
-
-@Component
-public class SoapProxy implements IProxy {
+@Entity
+@DiscriminatorValue("Soap")
+public class SoapProxy extends AProxy {
 	
+
 	private URI url;
-	IHotelService hotelProxy;
 	
+	@Transient
+	private IHotelService hotelProxy;
+	
+	
+	
+	public SoapProxy() {
+		super();
+	}
+
 	public SoapProxy(String uriInit) throws URISyntaxException, MalformedURLException {
 		URI uri = new URI(uriInit); // On initialise toujours avec cette ip le premier proxy
 		this.url = uri;
@@ -44,32 +60,82 @@ public class SoapProxy implements IProxy {
 
 	@Override
 	public List<ChambreModel> getAllChambre() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+		
+		LocalDate mtn = LocalDate.now();
+		String mtnStr = mtn.toString();
+		LocalDate oneYearLater = mtn.plusYears(1);
+		String oneYearLaterStr = oneYearLater.toString(); 
+		List<Chambre> listeChambreSoap = hotelProxy.listeChambreDisponible(mtnStr, oneYearLaterStr);
+		List<ChambreModel> listeChambreRest = new ArrayList<ChambreModel>();
+		for (Chambre chbrSoap : listeChambreSoap) {
+			ChambreModel chambreRestTmp = castChambreSoapToRest(chbrSoap);
+			listeChambreRest.add(chambreRestTmp);
+		}
+		
+		return listeChambreRest;
+	} 
 
 	@Override
 	public HotelModel getHotel() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void setReservation(String dateEntree, String dateSortie, String typeDeChambre) {
-		// TODO Auto-generated method stub
+		HotelModel hotelRest = new HotelModel();
+		hotelRest.setNom(this.hotelProxy.afficherNomHotel());;
+		hotelRest.setListeChambre(this.getAllChambre());
+		hotelRest.setAdresse(this.adresseHotel());
 		
+		return hotelRest;
 	}
 
 	@Override
 	public String afficherHotel() {
 		// TODO Auto-generated method stub
-		return null;
+		return this.hotelProxy.afficherHotel();
 	}
 
 	@Override
 	public AdresseModel adresseHotel() {
+		AdresseModel adresseRest = new AdresseModel();
+		adresseRest.setCodePostal(Integer.parseInt(this.hotelProxy.getAdresse().getCodePostal()));
+		adresseRest.setNumero(Integer.parseInt(this.hotelProxy.getAdresse().getNumero()));
+		adresseRest.setPays(this.hotelProxy.getAdresse().getPays());
+		adresseRest.setRue(this.hotelProxy.getAdresse().getRue());
+		adresseRest.setVille(this.hotelProxy.getAdresse().getVille());
+		
+		
+		return adresseRest;
+	}
+
+	@Override
+	public String setReservation(ReservationRequest requete) {
 		// TODO Auto-generated method stub
-		return null;
+		try {
+			this.getHotelProxy().setReservationWM(requete.getDateEntreeStr(),requete.getDateSortieStr(),requete.getTypeDeChambreStr());
+		} catch (ReservationFailedException_Exception e) {
+			// TODO Auto-generated catch block
+			return e.getMessage();
+		} catch (ChambreNonDisponibleException_Exception e) {
+			// TODO Auto-generated catch block
+			return e.getMessage();
+		}
+		return ("Réservation confirmé au"+this.getHotelProxy().afficherNomHotel());
+	}
+
+	@Override
+	public List listeTypeChambre() {
+		
+		return this.hotelProxy.listeTypeChambre();
+		
+	}
+	
+	public static ChambreModel castChambreSoapToRest(Chambre chambreSoap) {
+		ChambreModel chambreRest = new ChambreModel(); 
+		chambreRest.setPrix(chambreSoap.getPrix());
+		chambreRest.setTypeChambre(chambreSoap.getTypeChambre().toString());
+		chambreRest.setNumeroChambre(chambreSoap.getNumeroChambre());
+		chambreRest.setNombreLit(chambreSoap.getNombreLit());
+		chambreRest.addReservation(chambreSoap.getReservation());
+		
+		
+		return chambreRest;
 	}
 
 	 

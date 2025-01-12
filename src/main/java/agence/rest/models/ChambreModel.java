@@ -7,22 +7,24 @@ import java.util.List;
 public class ChambreModel {
 	
     private int numeroChambre; 
-	private String nombreLit;
+	private int nombreLit;
     private double prix;
     private String typeChambre;
     private String hotel;
     private List<LocalDate> dateReservee;
-    //private List <Reservation>;
+    private List <Object> listReservation;
+    
+    
 	public int getNumeroChambre() {
 		return numeroChambre;
 	}
 	public void setNumeroChambre(int numeroChambre) {
 		this.numeroChambre = numeroChambre;
 	}
-	public String getNombreLit() {
+	public int getNombreLit() {
 		return nombreLit;
 	}
-	public void setNombreLit(String nombreLit) {
+	public void setNombreLit(int nombreLit) {
 		this.nombreLit = nombreLit;
 	}
 	public double getPrix() {
@@ -49,6 +51,17 @@ public class ChambreModel {
 	public void setDateReservee(List<LocalDate> dateReservee) {
 		this.dateReservee = dateReservee;
 	}
+	
+	public List<Object> getReservation() {
+		return listReservation;
+	}
+	public void setReservation(List<Object> reservation) {
+		this.listReservation = reservation;
+	}
+	public void addReservation(Object reservation) {
+		this.listReservation.add(reservation);
+	}
+	
 	@Override
 	public String toString() {
 		return "Chambre [numeroChambre=" + numeroChambre + ", nombreLit=" + nombreLit + ", prix=" + prix

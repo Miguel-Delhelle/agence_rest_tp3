@@ -9,6 +9,10 @@ public class AdresseModel {
     private String ville;
     
     
+    
+	public AdresseModel() {
+		super();
+	}
 	public String getPays() {
 		return pays;
 	}

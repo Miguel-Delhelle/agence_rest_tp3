@@ -8,6 +8,42 @@ public class HotelModel {
 	private AdresseModel  adresse;
     private int nombreEtoile;
     private List<ChambreModel> listeChambre;
+    
+    
+    
+	public HotelModel() {
+		super();
+	}
+	
+	
+	
+	public HotelModel(String nom, AdresseModel adresse) {
+		super();
+		this.nom = nom;
+		this.adresse = adresse;
+	}
+
+
+
+	public HotelModel(String nom, AdresseModel adresse, List<ChambreModel> listeChambre) {
+		super();
+		this.nom = nom;
+		this.adresse = adresse;
+		this.listeChambre = listeChambre;
+	}
+
+
+	public HotelModel(String nom) {
+		super();
+		this.nom = nom;
+	}
+	public HotelModel(String nom, AdresseModel adresse, int nombreEtoile, List<ChambreModel> listeChambre) {
+		super();
+		this.nom = nom;
+		this.adresse = adresse;
+		this.nombreEtoile = nombreEtoile;
+		this.listeChambre = listeChambre;
+	}
 	public String getNom() {
 		return nom;
 	}

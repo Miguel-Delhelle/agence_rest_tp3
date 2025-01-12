@@ -10,7 +10,7 @@ import jakarta.xml.bind.annotation.XmlRegistry;
 /**
  * This object contains factory methods for each 
  * Java content interface and Java element interface 
- * generated in the agence.gateway.soap.apacheimport package. 
+ * generated in the agence.soap.apacheimport package. 
  * <p>An ObjectFactory allows you to programatically 
  * construct new instances of the Java representation 
  * for XML content. The Java representation of XML 
@@ -30,7 +30,11 @@ public class ObjectFactory {
     private final static QName _AfficherHotelResponse_QNAME = new QName("http://web.service.hotel/", "afficherHotelResponse");
     private final static QName _AfficherNomHotel_QNAME = new QName("http://web.service.hotel/", "afficherNomHotel");
     private final static QName _AfficherNomHotelResponse_QNAME = new QName("http://web.service.hotel/", "afficherNomHotelResponse");
+    private final static QName _GetAdresse_QNAME = new QName("http://web.service.hotel/", "getAdresse");
+    private final static QName _GetAdresseResponse_QNAME = new QName("http://web.service.hotel/", "getAdresseResponse");
     private final static QName _Hotel_QNAME = new QName("http://web.service.hotel/", "hotel");
+    private final static QName _ListeChambreDisponible_QNAME = new QName("http://web.service.hotel/", "listeChambreDisponible");
+    private final static QName _ListeChambreDisponibleResponse_QNAME = new QName("http://web.service.hotel/", "listeChambreDisponibleResponse");
     private final static QName _ListeChambreDisponibleToString_QNAME = new QName("http://web.service.hotel/", "listeChambreDisponibleToString");
     private final static QName _ListeChambreDisponibleToStringResponse_QNAME = new QName("http://web.service.hotel/", "listeChambreDisponibleToStringResponse");
     private final static QName _ListeTypeChambre_QNAME = new QName("http://web.service.hotel/", "listeTypeChambre");
@@ -43,7 +47,7 @@ public class ObjectFactory {
     private final static QName _ToStringResponse_QNAME = new QName("http://web.service.hotel/", "toStringResponse");
 
     /**
-     * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: agence.gateway.soap.apacheimport
+     * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: agence.soap.apacheimport
      * 
      */
     public ObjectFactory() {
@@ -114,11 +118,43 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link GetAdresse }
+     * 
+     */
+    public GetAdresse createGetAdresse() {
+        return new GetAdresse();
+    }
+
+    /**
+     * Create an instance of {@link GetAdresseResponse }
+     * 
+     */
+    public GetAdresseResponse createGetAdresseResponse() {
+        return new GetAdresseResponse();
+    }
+
+    /**
      * Create an instance of {@link Hotel }
      * 
      */
     public Hotel createHotel() {
         return new Hotel();
+    }
+
+    /**
+     * Create an instance of {@link ListeChambreDisponible }
+     * 
+     */
+    public ListeChambreDisponible createListeChambreDisponible() {
+        return new ListeChambreDisponible();
+    }
+
+    /**
+     * Create an instance of {@link ListeChambreDisponibleResponse }
+     * 
+     */
+    public ListeChambreDisponibleResponse createListeChambreDisponibleResponse() {
+        return new ListeChambreDisponibleResponse();
     }
 
     /**
@@ -320,6 +356,32 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetAdresse }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link GetAdresse }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://web.service.hotel/", name = "getAdresse")
+    public JAXBElement<GetAdresse> createGetAdresse(GetAdresse value) {
+        return new JAXBElement<GetAdresse>(_GetAdresse_QNAME, GetAdresse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetAdresseResponse }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link GetAdresseResponse }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://web.service.hotel/", name = "getAdresseResponse")
+    public JAXBElement<GetAdresseResponse> createGetAdresseResponse(GetAdresseResponse value) {
+        return new JAXBElement<GetAdresseResponse>(_GetAdresseResponse_QNAME, GetAdresseResponse.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link Hotel }{@code >}
      * 
      * @param value
@@ -330,6 +392,32 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://web.service.hotel/", name = "hotel")
     public JAXBElement<Hotel> createHotel(Hotel value) {
         return new JAXBElement<Hotel>(_Hotel_QNAME, Hotel.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link ListeChambreDisponible }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link ListeChambreDisponible }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://web.service.hotel/", name = "listeChambreDisponible")
+    public JAXBElement<ListeChambreDisponible> createListeChambreDisponible(ListeChambreDisponible value) {
+        return new JAXBElement<ListeChambreDisponible>(_ListeChambreDisponible_QNAME, ListeChambreDisponible.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link ListeChambreDisponibleResponse }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link ListeChambreDisponibleResponse }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://web.service.hotel/", name = "listeChambreDisponibleResponse")
+    public JAXBElement<ListeChambreDisponibleResponse> createListeChambreDisponibleResponse(ListeChambreDisponibleResponse value) {
+        return new JAXBElement<ListeChambreDisponibleResponse>(_ListeChambreDisponibleResponse_QNAME, ListeChambreDisponibleResponse.class, null, value);
     }
 
     /**
