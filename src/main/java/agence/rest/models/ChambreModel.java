@@ -1,9 +1,10 @@
-package agence.entity.models;
+package agence.rest.models;
+
 
 import java.time.LocalDate;
 import java.util.List;
 
-public class Chambre {
+public class ChambreModel {
 	
     private int numeroChambre; 
 	private String nombreLit;

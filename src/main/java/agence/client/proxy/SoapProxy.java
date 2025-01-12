@@ -1,16 +1,23 @@
-package agence.gateway.soap;
+package agence.client.proxy;
 
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.List;
 
-import agence.gateway.soap.jaxws.HotelService;
-import agence.gateway.soap.jaxws.IHotelService;
+import org.apache.cxf.jaxws.JaxWsProxyFactoryBean;
+import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Component;
+
+import agence.rest.models.AdresseModel;
+import agence.rest.models.ChambreModel;
+import agence.rest.models.HotelModel;
+import agence.soap.apacheimport.IHotelService;
 
 
 
-
-public class SoapProxy {
+@Component
+public class SoapProxy implements IProxy {
 	
 	private URI url;
 	IHotelService hotelProxy;
@@ -18,9 +25,12 @@ public class SoapProxy {
 	public SoapProxy(String uriInit) throws URISyntaxException, MalformedURLException {
 		URI uri = new URI(uriInit); // On initialise toujours avec cette ip le premier proxy
 		this.url = uri;
-		HotelService serviceTmp = new HotelService(uri.toURL());
-		IHotelService proxy = serviceTmp.getHotelPort();
-		this.hotelProxy = proxy;
+        JaxWsProxyFactoryBean factory = new JaxWsProxyFactoryBean();
+        factory.setServiceClass(IHotelService.class); // L'interface générée par CXF
+        factory.setAddress(uriInit);  // L'URL de ton service SOAP
+        
+        // Récupérer le proxy
+        this.hotelProxy = (IHotelService) factory.create();
 		
 	}
 
@@ -32,6 +42,35 @@ public class SoapProxy {
 		return hotelProxy;
 	}
 
+	@Override
+	public List<ChambreModel> getAllChambre() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public HotelModel getHotel() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setReservation(String dateEntree, String dateSortie, String typeDeChambre) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String afficherHotel() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public AdresseModel adresseHotel() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	 
 

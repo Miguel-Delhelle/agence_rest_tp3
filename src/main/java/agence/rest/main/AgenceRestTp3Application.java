@@ -7,9 +7,9 @@ import java.util.List;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import agence.entity.models.Chambre;
-import agence.gateway.rest.RestProxy;
-import agence.gateway.soap.SoapProxy;
+import agence.client.proxy.RestProxy;
+import agence.client.proxy.SoapProxy;
+import agence.rest.models.ChambreModel;
 
 @SpringBootApplication
 public class AgenceRestTp3Application {
@@ -25,7 +25,7 @@ public class AgenceRestTp3Application {
 		
 		SoapProxy hotelSoap = new SoapProxy("http://localhost:8888/hotel?wsdl");
 		RestProxy hotel1 = new RestProxy("http://localhost:8080/Hotel");
-		List<Chambre> listechambre = hotel1.getListeChambre();
+		List<ChambreModel> listechambre = hotel1.getAllChambre();
 		System.out.println(listechambre.toString());
 		System.out.println(listechambre.get(0).getNumeroChambre());
 		System.out.println(listechambre.get(0).getPrix());
