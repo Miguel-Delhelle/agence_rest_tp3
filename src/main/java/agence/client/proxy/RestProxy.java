@@ -28,7 +28,10 @@ public class RestProxy extends AProxy {
 	
 	
 	public RestProxy() {
+		
 		super();
+		RestTemplate restTemplate = new RestTemplate();
+		this.restTemplate = restTemplate;
 	}
 
 	public RestProxy(String url) {
@@ -39,10 +42,6 @@ public class RestProxy extends AProxy {
 		this.restTemplate = restTemplate;
 	}
 
-	@Bean
-	public RestTemplate generateRestTemplate(RestTemplateBuilder builder) {
-		return builder.build();
-	}
 	
 	public List<ChambreModel> getAllChambre () {
 		//URI uri = new URI(this.url);
