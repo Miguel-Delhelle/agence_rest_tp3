@@ -1,9 +1,8 @@
 package agence.client.proxy;
 
+import java.io.File;
 import java.net.MalformedURLException;
-import java.net.URI;
 import java.net.URISyntaxException;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,6 +19,9 @@ import agence.soap.apacheimport.ReservationFailedException_Exception;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Transient;
+import jakarta.xml.bind.JAXBContext;
+import jakarta.xml.bind.JAXBException;
+import jakarta.xml.bind.Unmarshaller;
 
 
 @Entity
@@ -27,7 +29,7 @@ import jakarta.persistence.Transient;
 public class SoapProxy extends AProxy {
 	
 
-	private URI url;
+	private String url = "http://localhost:8888/hotel?wsdl";
 	
 	@Transient
 	private IHotelService hotelProxy;
@@ -36,11 +38,15 @@ public class SoapProxy extends AProxy {
 	
 	public SoapProxy() {
 		super();
+        JaxWsProxyFactoryBean factory = new JaxWsProxyFactoryBean();
+        factory.setServiceClass(IHotelService.class);
+        factory.setAddress(url);
+		this.hotelProxy = (IHotelService) factory.create();
 	}
 
 	public SoapProxy(String uriInit) throws URISyntaxException, MalformedURLException {
-		URI uri = new URI(uriInit); // On initialise toujours avec cette ip le premier proxy
-		this.url = uri;
+		//URI uri = new URI(uriInit); // On initialise toujours avec cette ip le premier proxy
+		this.url = uriInit;
         JaxWsProxyFactoryBean factory = new JaxWsProxyFactoryBean();
         factory.setServiceClass(IHotelService.class); // L'interface générée par CXF
         factory.setAddress(uriInit);  // L'URL de ton service SOAP
@@ -50,7 +56,7 @@ public class SoapProxy extends AProxy {
 		
 	}
 
-	public URI getUrl() {
+	public String getUrl() {
 		return url;
 	}
 
@@ -59,14 +65,20 @@ public class SoapProxy extends AProxy {
 	}
 
 	@Override
-	public List<ChambreModel> getAllChambre() {
+	public List<ChambreModel> getAllChambre(){
 		
-		LocalDate mtn = LocalDate.now();
+		/*LocalDate mtn = LocalDate.now();
 		String mtnStr = mtn.toString();
 		LocalDate oneYearLater = mtn.plusYears(1);
 		String oneYearLaterStr = oneYearLater.toString(); 
-		List<Chambre> listeChambreSoap = hotelProxy.listeChambreDisponible(mtnStr, oneYearLaterStr);
+		List<Chambre> listeChambreSoap = hotelProxy.listeChambreDisponible(mtnStr, oneYearLaterStr); */
+		
+		//JAXBContext context = JAXBContext.newInstance(Chambre.class);
+		//Unmarshaller unmarshaller = context.createUnmarshaller();
 		List<ChambreModel> listeChambreRest = new ArrayList<ChambreModel>();
+		List<Chambre> listeChambreSoap = this.hotelProxy.getListeChambre();
+		
+		
 		for (Chambre chbrSoap : listeChambreSoap) {
 			ChambreModel chambreRestTmp = castChambreSoapToRest(chbrSoap);
 			listeChambreRest.add(chambreRestTmp);

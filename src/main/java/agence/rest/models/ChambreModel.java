@@ -2,6 +2,7 @@ package agence.rest.models;
 
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ChambreModel {
@@ -12,7 +13,7 @@ public class ChambreModel {
     private String typeChambre;
     private String hotel;
     private List<LocalDate> dateReservee;
-    private List <Object> listReservation;
+    private List listReservation = new ArrayList<>();
     
     
 	public int getNumeroChambre() {

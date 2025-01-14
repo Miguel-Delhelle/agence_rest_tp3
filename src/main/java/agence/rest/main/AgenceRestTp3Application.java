@@ -33,10 +33,10 @@ public class AgenceRestTp3Application {
 		System.out.println("Réponse:" + reponse); */
 		
 		//SoapProxy hotelSoap = new SoapProxy("http://localhost:8888/hotel?wsdl");
-		RestProxy hotel1 = new RestProxy("http://localhost:8080/Hotel");
-		List<ChambreModel> listechambre = hotel1.getAllChambre();
+		//RestProxy hotel1 = new RestProxy("http://localhost:8080/Hotel");
+		//List<ChambreModel> listechambre = hotel1.getAllChambre();
 		//System.out.println(hotelSoap.getHotel().toString());
-		System.out.println(hotel1.getHotel().toString());
+		System.out.println("Serveur prêt");
 
 	}
 

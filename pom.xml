@@ -76,11 +76,11 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
-			<!--<plugin>
+			<plugin>
             <groupId>org.apache.cxf</groupId>
             <artifactId>cxf-codegen-plugin</artifactId>
             <version>4.0.3</version>
-            <executions>
+           <!-- <executions>
                 <execution>
                     <id>generate-sources</id>
                     <phase>generate-sources</phase>
@@ -99,8 +99,8 @@
                         <goal>wsdl2java</goal>
                     </goals>
                 </execution>
-            </executions>
-        </plugin> !-->
+            </executions> -->
+        </plugin>
 		</plugins>
 	</build>
 

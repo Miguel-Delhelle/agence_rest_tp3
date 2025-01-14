@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import agence.client.proxy.AProxy;
+import agence.client.proxy.RestProxy;
 import agence.rest.models.HotelModel;
 import agence.rest.repositories.ProxyRepository;
 

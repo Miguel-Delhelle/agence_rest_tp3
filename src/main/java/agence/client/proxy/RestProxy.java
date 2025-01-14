@@ -1,9 +1,8 @@
 package agence.client.proxy;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.boot.web.client.RestTemplateBuilder;
-import org.springframework.context.annotation.Bean;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.web.client.RestTemplate;
@@ -23,15 +22,14 @@ public class RestProxy extends AProxy {
 	
 	@Transient
 	private RestTemplate restTemplate;
-	private String url;
 	
+	private String url;	
 	
 	
 	public RestProxy() {
-		
 		super();
-		RestTemplate restTemplate = new RestTemplate();
-		this.restTemplate = restTemplate;
+		RestTemplate restTemplate = new RestTemplate(); 
+		this.restTemplate = restTemplate; 
 	}
 
 	public RestProxy(String url) {
@@ -47,14 +45,14 @@ public class RestProxy extends AProxy {
 		//URI uri = new URI(this.url);
 		
 		//return (List<Object>) this.restTemplate.getForObject(uri+"/chambre", Chambre.class);
-        return this.restTemplate.exchange(url+"/chambre", HttpMethod.GET, null, new ParameterizedTypeReference<List<ChambreModel>>() {}).getBody();
+        return this.restTemplate.exchange(this.url+"/chambre", HttpMethod.GET, null, new ParameterizedTypeReference<List<ChambreModel>>() {}).getBody();
 		
 	}
 
 	@Override
 	public HotelModel getHotel() {
 		// TODO Auto-generated method stub
-        return this.restTemplate.getForObject(url+"/hotel", HotelModel.class);
+        return this.restTemplate.getForObject(this.url+"/hotel", HotelModel.class);
 	}
 
 	@Override

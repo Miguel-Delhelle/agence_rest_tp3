@@ -32,7 +32,8 @@ public class ObjectFactory {
     private final static QName _AfficherNomHotelResponse_QNAME = new QName("http://web.service.hotel/", "afficherNomHotelResponse");
     private final static QName _GetAdresse_QNAME = new QName("http://web.service.hotel/", "getAdresse");
     private final static QName _GetAdresseResponse_QNAME = new QName("http://web.service.hotel/", "getAdresseResponse");
-    private final static QName _Hotel_QNAME = new QName("http://web.service.hotel/", "hotel");
+    private final static QName _GetListeChambre_QNAME = new QName("http://web.service.hotel/", "getListeChambre");
+    private final static QName _GetListeChambreResponse_QNAME = new QName("http://web.service.hotel/", "getListeChambreResponse");
     private final static QName _ListeChambreDisponible_QNAME = new QName("http://web.service.hotel/", "listeChambreDisponible");
     private final static QName _ListeChambreDisponibleResponse_QNAME = new QName("http://web.service.hotel/", "listeChambreDisponibleResponse");
     private final static QName _ListeChambreDisponibleToString_QNAME = new QName("http://web.service.hotel/", "listeChambreDisponibleToString");
@@ -134,11 +135,19 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Hotel }
+     * Create an instance of {@link GetListeChambre }
      * 
      */
-    public Hotel createHotel() {
-        return new Hotel();
+    public GetListeChambre createGetListeChambre() {
+        return new GetListeChambre();
+    }
+
+    /**
+     * Create an instance of {@link GetListeChambreResponse }
+     * 
+     */
+    public GetListeChambreResponse createGetListeChambreResponse() {
+        return new GetListeChambreResponse();
     }
 
     /**
@@ -270,6 +279,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link Hotel }
+     * 
+     */
+    public Hotel createHotel() {
+        return new Hotel();
+    }
+
+    /**
      * Create an instance of {@link Chambre.Disponibilite.Entry }
      * 
      */
@@ -382,16 +399,29 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link Hotel }{@code >}
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetListeChambre }{@code >}
      * 
      * @param value
      *     Java instance representing xml element's value.
      * @return
-     *     the new instance of {@link JAXBElement }{@code <}{@link Hotel }{@code >}
+     *     the new instance of {@link JAXBElement }{@code <}{@link GetListeChambre }{@code >}
      */
-    @XmlElementDecl(namespace = "http://web.service.hotel/", name = "hotel")
-    public JAXBElement<Hotel> createHotel(Hotel value) {
-        return new JAXBElement<Hotel>(_Hotel_QNAME, Hotel.class, null, value);
+    @XmlElementDecl(namespace = "http://web.service.hotel/", name = "getListeChambre")
+    public JAXBElement<GetListeChambre> createGetListeChambre(GetListeChambre value) {
+        return new JAXBElement<GetListeChambre>(_GetListeChambre_QNAME, GetListeChambre.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetListeChambreResponse }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link GetListeChambreResponse }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://web.service.hotel/", name = "getListeChambreResponse")
+    public JAXBElement<GetListeChambreResponse> createGetListeChambreResponse(GetListeChambreResponse value) {
+        return new JAXBElement<GetListeChambreResponse>(_GetListeChambreResponse_QNAME, GetListeChambreResponse.class, null, value);
     }
 
     /**
