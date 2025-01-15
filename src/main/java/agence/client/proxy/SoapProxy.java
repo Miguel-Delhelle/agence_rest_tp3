@@ -1,12 +1,12 @@
 package agence.client.proxy;
 
-import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.cxf.jaxws.JaxWsProxyFactoryBean;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import agence.rest.models.AdresseModel;
 import agence.rest.models.ChambreModel;
@@ -18,10 +18,8 @@ import agence.soap.apacheimport.IHotelService;
 import agence.soap.apacheimport.ReservationFailedException_Exception;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
+import jakarta.persistence.PostLoad;
 import jakarta.persistence.Transient;
-import jakarta.xml.bind.JAXBContext;
-import jakarta.xml.bind.JAXBException;
-import jakarta.xml.bind.Unmarshaller;
 
 
 @Entity
@@ -29,21 +27,21 @@ import jakarta.xml.bind.Unmarshaller;
 public class SoapProxy extends AProxy {
 	
 
-	private String url = "http://localhost:8888/hotel?wsdl";
+	private String url = "http://default-url.com";
 	
 	@Transient
 	private IHotelService hotelProxy;
 	
 	
-	
-	public SoapProxy() {
+	protected SoapProxy() {
 		super();
-        JaxWsProxyFactoryBean factory = new JaxWsProxyFactoryBean();
+        /*JaxWsProxyFactoryBean factory = new JaxWsProxyFactoryBean();
         factory.setServiceClass(IHotelService.class);
         factory.setAddress(url);
-		this.hotelProxy = (IHotelService) factory.create();
+		this.hotelProxy = (IHotelService) factory.create(); */
 	}
 
+    @Autowired
 	public SoapProxy(String uriInit) throws URISyntaxException, MalformedURLException {
 		//URI uri = new URI(uriInit); // On initialise toujours avec cette ip le premier proxy
 		this.url = uriInit;
@@ -56,6 +54,15 @@ public class SoapProxy extends AProxy {
 		
 	}
 
+    @PostLoad
+    public void postLoad() {
+        JaxWsProxyFactoryBean factory = new JaxWsProxyFactoryBean();
+        factory.setServiceClass(IHotelService.class); // L'interface générée par CXF
+        factory.setAddress(this.url);  // L'URL de ton service SOAP
+        
+        // Récupérer le proxy
+        this.hotelProxy = (IHotelService) factory.create();
+    }
 	public String getUrl() {
 		return url;
 	}
@@ -64,7 +71,6 @@ public class SoapProxy extends AProxy {
 		return hotelProxy;
 	}
 
-	@Override
 	public List<ChambreModel> getAllChambre(){
 		
 		/*LocalDate mtn = LocalDate.now();
@@ -87,7 +93,6 @@ public class SoapProxy extends AProxy {
 		return listeChambreRest;
 	} 
 
-	@Override
 	public HotelModel getHotel() {
 		HotelModel hotelRest = new HotelModel();
 		hotelRest.setNom(this.hotelProxy.afficherNomHotel());;
@@ -97,13 +102,11 @@ public class SoapProxy extends AProxy {
 		return hotelRest;
 	}
 
-	@Override
 	public String afficherHotel() {
 		// TODO Auto-generated method stub
 		return this.hotelProxy.afficherHotel();
 	}
 
-	@Override
 	public AdresseModel adresseHotel() {
 		AdresseModel adresseRest = new AdresseModel();
 		adresseRest.setCodePostal(Integer.parseInt(this.hotelProxy.getAdresse().getCodePostal()));
@@ -116,7 +119,6 @@ public class SoapProxy extends AProxy {
 		return adresseRest;
 	}
 
-	@Override
 	public String setReservation(ReservationRequest requete) {
 		// TODO Auto-generated method stub
 		try {
@@ -131,7 +133,6 @@ public class SoapProxy extends AProxy {
 		return ("Réservation confirmé au"+this.getHotelProxy().afficherNomHotel());
 	}
 
-	@Override
 	public List listeTypeChambre() {
 		
 		return this.hotelProxy.listeTypeChambre();
