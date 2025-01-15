@@ -28,7 +28,7 @@ public abstract class AProxy {
 	public abstract String setReservation( ReservationRequest requete);
 	public abstract String afficherHotel();
 	public abstract AdresseModel adresseHotel();
-	public abstract List listeTypeChambre();
+	public abstract List<?> listeTypeChambre();
 	
 	
 }

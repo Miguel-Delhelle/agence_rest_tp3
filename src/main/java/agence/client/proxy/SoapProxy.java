@@ -73,14 +73,6 @@ public class SoapProxy extends AProxy {
 
 	public List<ChambreModel> getAllChambre(){
 		
-		/*LocalDate mtn = LocalDate.now();
-		String mtnStr = mtn.toString();
-		LocalDate oneYearLater = mtn.plusYears(1);
-		String oneYearLaterStr = oneYearLater.toString(); 
-		List<Chambre> listeChambreSoap = hotelProxy.listeChambreDisponible(mtnStr, oneYearLaterStr); */
-		
-		//JAXBContext context = JAXBContext.newInstance(Chambre.class);
-		//Unmarshaller unmarshaller = context.createUnmarshaller();
 		List<ChambreModel> listeChambreRest = new ArrayList<ChambreModel>();
 		List<Chambre> listeChambreSoap = this.hotelProxy.getListeChambre();
 		

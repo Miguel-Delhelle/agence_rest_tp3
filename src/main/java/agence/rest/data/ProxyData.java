@@ -18,10 +18,11 @@ public class ProxyData {
 	@Bean
 	public CommandLineRunner initDatabaseHotel(ProxyRepository repository) {
 		return args -> {
+			
 			AProxy leParisien = new RestProxy("http://localhost:8080/Hotel");
 			AProxy laComedie = new SoapProxy("http://localhost:8888/hotel?wsdl");
 			
-			logger.info("Préchargement de la base de donnée avec"+ repository.save(leParisien) +"et"+repository.save(laComedie));
+			logger.info("Préchargement de la base de donnée avec"+repository.save(leParisien) +"et"+repository.save(laComedie));
 		};
 	}
 	

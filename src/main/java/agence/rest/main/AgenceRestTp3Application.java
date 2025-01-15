@@ -2,16 +2,18 @@ package agence.rest.main;
 
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
-import java.util.List;
+import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.core.convert.support.ConfigurableConversionService;
+import org.springframework.core.env.ConfigurableEnvironment;
+import org.springframework.core.env.MissingRequiredPropertiesException;
+import org.springframework.core.env.MutablePropertySources;
+import org.springframework.core.env.Profiles;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-
-import agence.client.proxy.RestProxy;
-import agence.client.proxy.SoapProxy;
-import agence.rest.models.ChambreModel;
 
 @EntityScan(basePackages = {"agence.client.proxy"})
 
@@ -23,7 +25,10 @@ import agence.rest.models.ChambreModel;
 })
 public class AgenceRestTp3Application {
 	
+    
+    
 	public static void main(String[] args) throws URISyntaxException, MalformedURLException {
+		
 		SpringApplication.run(AgenceRestTp3Application.class, args);
 		
 		/*RestTemplate restTemplate = new RestTemplate();

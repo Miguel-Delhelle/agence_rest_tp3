@@ -1,0 +1,10 @@
+.box {
+    border: 2px solid #333;  /* Bordure de 2 pixels, couleur sombre */
+    padding: 15px;           /* Espacement interne (entre la bordure et le contenu) */
+    margin: 10px;            /* Espacement autour de la boîte */
+    border-radius: 8px;      /* Coins arrondis pour un effet visuel plus doux */
+    background-color: #f9f9f9; /* Couleur de fond de la boîte */
+    width: auto;             /* Largeur automatique pour s'adapter au contenu */
+    min-width: 200px;        /* Largeur minimale */
+    max-width: 400px;        /* Largeur maximale */
+}
