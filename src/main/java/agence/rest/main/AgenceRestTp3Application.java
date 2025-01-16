@@ -31,16 +31,7 @@ public class AgenceRestTp3Application {
 		
 		SpringApplication.run(AgenceRestTp3Application.class, args);
 		
-		/*RestTemplate restTemplate = new RestTemplate();
-		String url = "http://localhost:8080/Hotel/chambre";
-		String reponse = restTemplate.getForObject(url, String.class);
-		
-		System.out.println("Réponse:" + reponse); */
-		
-		//SoapProxy hotelSoap = new SoapProxy("http://localhost:8888/hotel?wsdl");
-		//RestProxy hotel1 = new RestProxy("http://localhost:8080/Hotel");
-		//List<ChambreModel> listechambre = hotel1.getAllChambre();
-		//System.out.println(hotelSoap.getHotel().toString());
+
 		System.out.println("Serveur prêt");
 
 	}

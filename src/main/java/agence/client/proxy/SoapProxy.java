@@ -2,12 +2,14 @@ package agence.client.proxy;
 
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.cxf.jaxws.JaxWsProxyFactoryBean;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import agence.rest.common.MDMethod;
 import agence.rest.models.AdresseModel;
 import agence.rest.models.ChambreModel;
 import agence.rest.models.HotelModel;
@@ -114,7 +116,8 @@ public class SoapProxy extends AProxy {
 	public String setReservation(ReservationRequest requete) {
 		// TODO Auto-generated method stub
 		try {
-			this.getHotelProxy().setReservationWM(requete.getDateEntreeStr(),requete.getDateSortieStr(),requete.getTypeDeChambreStr());
+
+			this.getHotelProxy().setReservationWM(requete.getDateEntree(), requete.getDateSortie(), requete.getTypeDeChambre());
 		} catch (ReservationFailedException_Exception e) {
 			// TODO Auto-generated catch block
 			return e.getMessage();
@@ -137,7 +140,7 @@ public class SoapProxy extends AProxy {
 		chambreRest.setTypeChambre(chambreSoap.getTypeChambre().toString());
 		chambreRest.setNumeroChambre(chambreSoap.getNumeroChambre());
 		chambreRest.setNombreLit(chambreSoap.getNombreLit());
-		chambreRest.addReservation(chambreSoap.getReservation());
+		chambreRest.addReservation(chambreSoap.getDisponibilite());
 		
 		
 		return chambreRest;

@@ -15,20 +15,20 @@ public class ReservationRequest {
 	
 	
 	// STRING
-	public String getDateEntreeStr() {
+	public String getDateEntree() {
 		return dateEntree;
 	}
 	public void setDateEntree(String dateEntree) {
 		this.dateEntree = dateEntree;
 	}
-	public String getDateSortieStr() {
+	public String getDateSortie() {
 		return dateSortie;
 	}
 	
 	public void setDateSortie(String dateSortie) {
 		this.dateSortie = dateSortie;
 	}
-	public String getTypeDeChambreStr() {
+	public String getTypeDeChambre() {
 		return typeDeChambre;
 	}
 	public void setTypeDeChambre(String typeDeChambre) {
@@ -36,14 +36,6 @@ public class ReservationRequest {
 	}
 	
 	
-	//OBJET CASTER 
-	public LocalDate getDateEntree() {
-		return MDMethod.strToDat(dateEntree);
-	}
-
-	public LocalDate getDateSortie() {
-		return MDMethod.strToDat(dateSortie);
-	}
 	
 	
 }

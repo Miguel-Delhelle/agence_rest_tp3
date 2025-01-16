@@ -4,7 +4,18 @@ import java.time.LocalDate;
 
 
 
-public abstract class MDMethod{
+public class MDMethod{
+	
+	public static LocalDate strToDat(String strDate) {
+		String[] date = strDate.split("-");
+		int jour = Integer.parseInt(date[0]);
+		int mois = Integer.parseInt(date[1]);
+		int annee = Integer.parseInt(date[2]);
+		
+		LocalDate localDate = LocalDate.of(annee, mois, jour);
+		
+		return localDate;
+	}
 	
 	// Méthode autour de LocalDate 
 	public static String dateToFrenchString(LocalDate date) {
@@ -42,16 +53,8 @@ public abstract class MDMethod{
 		return jour;
 	}
 	
-	public static LocalDate strToDat(String strDate) {
-		String[] date = strDate.split("-");
-		int jour = Integer.parseInt(date[0]);
-		int mois = Integer.parseInt(date[1]);
-		int annee = Integer.parseInt(date[2]);
-		
-		LocalDate localDate = LocalDate.of(annee, mois, jour);
-		
-		return localDate;
-	}
+
+	
 	
 }
 

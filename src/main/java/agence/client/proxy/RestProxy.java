@@ -1,11 +1,13 @@
 package agence.client.proxy;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.web.client.RestTemplate;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import agence.rest.models.AdresseModel;
 import agence.rest.models.ChambreModel;
@@ -58,7 +60,12 @@ public class RestProxy extends AProxy {
 	@Override
 	public String setReservation(ReservationRequest requete) {
 		// TODO Auto-generated method stub
-		
+		try {
+			System.out.println("JSON ENVOYE LA MTN LOGGER MIGUEL REGARTDE ICI :: -->>>"+new ObjectMapper().writeValueAsString(requete));
+		} catch (JsonProcessingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return this.restTemplate.postForObject(this.url+"/reservation", requete, String.class);
 	}
 

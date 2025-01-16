@@ -46,7 +46,6 @@ import jakarta.xml.bind.annotation.XmlType;
  *         &lt;element name="nombreLit" type="{http://www.w3.org/2001/XMLSchema}int"/&gt;
  *         &lt;element name="numeroChambre" type="{http://www.w3.org/2001/XMLSchema}int"/&gt;
  *         &lt;element name="prix" type="{http://www.w3.org/2001/XMLSchema}double"/&gt;
- *         &lt;element name="reservation" type="{http://web.service.hotel/}reservation" minOccurs="0"/&gt;
  *         &lt;element name="typeChambre" type="{http://web.service.hotel/}typeChambre" minOccurs="0"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
@@ -63,7 +62,6 @@ import jakarta.xml.bind.annotation.XmlType;
     "nombreLit",
     "numeroChambre",
     "prix",
-    "reservation",
     "typeChambre"
 })
 public class Chambre {
@@ -74,7 +72,6 @@ public class Chambre {
     protected int nombreLit;
     protected int numeroChambre;
     protected double prix;
-    protected Reservation reservation;
     @XmlSchemaType(name = "string")
     protected TypeChambre typeChambre;
 
@@ -172,30 +169,6 @@ public class Chambre {
      */
     public void setPrix(double value) {
         this.prix = value;
-    }
-
-    /**
-     * Obtient la valeur de la propriété reservation.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Reservation }
-     *     
-     */
-    public Reservation getReservation() {
-        return reservation;
-    }
-
-    /**
-     * Définit la valeur de la propriété reservation.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Reservation }
-     *     
-     */
-    public void setReservation(Reservation value) {
-        this.reservation = value;
     }
 
     /**
